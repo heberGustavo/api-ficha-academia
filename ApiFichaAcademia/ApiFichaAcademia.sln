@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiFichaAcademia", "ApiFichaAcademia\ApiFichaAcademia.csproj", "{37830C46-3D65-47AB-BEC2-349EC34E463B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia", "ApiFichaAcademia\ApiFichaAcademia.csproj", "{37830C46-3D65-47AB-BEC2-349EC34E463B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-API", "1-API", "{4239D20A-4AFA-4811-BBA2-767D501448DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Models", "3-Models", "{07DF5016-8A8F-4975-BB95-842FACECC59C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiFichaAcademia.Models", "ApiFichaAcademia.Models\ApiFichaAcademia.Models.csproj", "{0A194D15-AB71-4B01-AB33-3497C35CED8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Models", "ApiFichaAcademia.Models\ApiFichaAcademia.Models.csproj", "{0A194D15-AB71-4B01-AB33-3497C35CED8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiFichaAcademia.Commom", "ApiFichaAcademia.Commom\ApiFichaAcademia.Commom.csproj", "{30AA679F-C747-46B3-B8B4-68CA104373B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Commom", "ApiFichaAcademia.Commom\ApiFichaAcademia.Commom.csproj", "{30AA679F-C747-46B3-B8B4-68CA104373B0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Common", "4-Common", "{0A388A17-D830-454B-A99E-7878E9A13827}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Common", "5-Common", "{0A388A17-D830-454B-A99E-7878E9A13827}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Business", "2-Business", "{E8064E71-0E4E-42A4-ADF9-2186A3A5AB61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6-Migrations", "6-Migrations", "{0BF58A66-FC6D-415F-B0A3-50E51837B942}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Migrations", "ApiFichaAcademia.Repository\ApiFichaAcademia.Migrations.csproj", "{2247225D-1551-40E7-8A57-A548DC8D3880}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,10 @@ Global
 		{30AA679F-C747-46B3-B8B4-68CA104373B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30AA679F-C747-46B3-B8B4-68CA104373B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30AA679F-C747-46B3-B8B4-68CA104373B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2247225D-1551-40E7-8A57-A548DC8D3880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2247225D-1551-40E7-8A57-A548DC8D3880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2247225D-1551-40E7-8A57-A548DC8D3880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2247225D-1551-40E7-8A57-A548DC8D3880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +51,7 @@ Global
 		{37830C46-3D65-47AB-BEC2-349EC34E463B} = {4239D20A-4AFA-4811-BBA2-767D501448DB}
 		{0A194D15-AB71-4B01-AB33-3497C35CED8A} = {07DF5016-8A8F-4975-BB95-842FACECC59C}
 		{30AA679F-C747-46B3-B8B4-68CA104373B0} = {0A388A17-D830-454B-A99E-7878E9A13827}
+		{2247225D-1551-40E7-8A57-A548DC8D3880} = {0BF58A66-FC6D-415F-B0A3-50E51837B942}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63CD49AD-FB12-4635-B011-49DB30EEBA7C}

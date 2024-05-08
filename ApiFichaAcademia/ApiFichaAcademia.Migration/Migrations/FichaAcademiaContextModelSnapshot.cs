@@ -2,14 +2,12 @@
 using ApiFichaAcademia.Migrations.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace ApiFichaAcademia.Migrations.Migrations
 {
-    [DbContext(typeof(FichaAcademiaContext))]
+	[DbContext(typeof(FichaAcademiaContext))]
     partial class FichaAcademiaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

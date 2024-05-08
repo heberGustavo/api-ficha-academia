@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ApiFichaAcademia.Migrations.Migrations
 {
-    /// <inheritdoc />
-    public partial class creationTableTeacher : Migration
+	/// <inheritdoc />
+	public partial class creationTableTeacher : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Models", "3-Models", "{07
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Models", "ApiFichaAcademia.Models\ApiFichaAcademia.Models.csproj", "{0A194D15-AB71-4B01-AB33-3497C35CED8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Commom", "ApiFichaAcademia.Commom\ApiFichaAcademia.Commom.csproj", "{30AA679F-C747-46B3-B8B4-68CA104373B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Common", "ApiFichaAcademia.Commom\ApiFichaAcademia.Common.csproj", "{30AA679F-C747-46B3-B8B4-68CA104373B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Common", "5-Common", "{0A388A17-D830-454B-A99E-7878E9A13827}"
 EndProject

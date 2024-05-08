@@ -1,4 +1,4 @@
-﻿namespace ApiFichaAcademia.Commom
+﻿namespace ApiFichaAcademia.Common
 {
 	public enum EnumPeriod
 	{

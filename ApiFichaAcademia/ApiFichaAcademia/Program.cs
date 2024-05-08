@@ -1,11 +1,23 @@
+using ApiFichaAcademia.Migrations.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-// Add services to the container.
+#region Database
+var connectionString = builder.Configuration.GetConnectionString("FichaAcademiaConection");
+services.AddDbContext<FichaAcademiaContext>(options =>
+{
+	options.UseSqlServer(connectionString);
+});
+#endregion
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddControllers();
+
+#region Swagger
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+#endregion
 
 var app = builder.Build();
 

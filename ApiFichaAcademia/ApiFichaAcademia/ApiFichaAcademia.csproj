@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiFichaAcademia.CrossCutting\ApiFichaAcademia.CrossCutting.csproj" />
     <ProjectReference Include="..\ApiFichaAcademia.Migration\ApiFichaAcademia.Migration.csproj" />
-    <ProjectReference Include="..\ApiFichaAcademia.Repository\ApiFichaAcademia.Migrations.csproj" />
   </ItemGroup>
 
 </Project>

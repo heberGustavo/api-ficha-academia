@@ -15,6 +15,8 @@ services.AddDbContext<FichaAcademiaContext>(options =>
 	options.UseSqlServer(connectionString);
 });
 
+services.AddTransient<DbContext, FichaAcademiaContext>();
+
 #endregion
 
 #region Mapper

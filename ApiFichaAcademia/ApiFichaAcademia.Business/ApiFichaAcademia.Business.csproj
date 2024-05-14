@@ -8,12 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiFichaAcademia.Business\ApiFichaAcademia.Business.csproj" />
+    <ProjectReference Include="..\ApiFichaAcademia.Models\ApiFichaAcademia.Models.csproj" />
     <ProjectReference Include="..\ApiFichaAcademia.Repository\ApiFichaAcademia.Repository.csproj" />
   </ItemGroup>
 

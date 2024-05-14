@@ -1,14 +1,14 @@
-﻿using ApiFichaAcademia.Repository.Contract;
-using ApiFichaAcademia.Repository.Implementation;
+﻿using ApiFichaAcademia.Repository;
+using ApiFichaAcademia.Repository.Contract;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ApiFichaAcademia.CrossCutting.DependencyGroups
 {
-	public class DataDependencyInjection
+    public class DataDependencyInjection
 	{
 		public static void Register(IServiceCollection serviceCollection)
 		{
-			serviceCollection.AddTransient<ITeacherRepository, TeacherRepository>();
+			serviceCollection.AddScoped<ITeacherRepository, TeacherRepository>();
 		}
 	}
 }

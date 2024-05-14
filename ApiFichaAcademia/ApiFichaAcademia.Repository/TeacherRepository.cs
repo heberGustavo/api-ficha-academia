@@ -15,23 +15,9 @@ namespace ApiFichaAcademia.Repository
 
 		#region READ
 
-		public async Task<List<Teacher>> GetAll()
-        {
-            try
-            {
-				var result = await _dbContext.Set<Teacher>().ToListAsync();
-				return result;
-			}
-            catch (Exception e)
-            {
-                throw;
-            }
-		}
+		public async Task<List<Teacher>> GetAll() => await _dbContext.Set<Teacher>().ToListAsync();
 
-        public Task<Teacher> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Teacher> GetById(int id) => await _dbContext.Set<Teacher>().FirstOrDefaultAsync(x => x.Id == id);
 
         #endregion
 

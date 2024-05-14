@@ -24,9 +24,11 @@ namespace ApiFichaAcademia.Business
 			return _mapper.Map<List<TeacherDTO>>(await _teacherRepository.GetAll());
 		}
 
-		public Task<TeacherDTO> GetById(int id)
+		public async Task<TeacherDTO> GetById(int id)
 		{
-			throw new NotImplementedException();
+			if (id <= 0) return new TeacherDTO();
+
+			return _mapper.Map<TeacherDTO>(await _teacherRepository.GetById(id));
 		}
 
 		#endregion

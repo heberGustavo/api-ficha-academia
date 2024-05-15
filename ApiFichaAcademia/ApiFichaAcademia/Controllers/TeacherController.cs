@@ -46,5 +46,12 @@ namespace ApiFichaAcademia.Controllers
 
 			return Ok(result);
 		}
+
+		[HttpDelete("{id}")]
+		public async Task<ActionResult> Delete(int id)
+		{
+			var result = await _teacherBusiness.Delete(id);
+			return Ok(result);
+		}
 	}
 }

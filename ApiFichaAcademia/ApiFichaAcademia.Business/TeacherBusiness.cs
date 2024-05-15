@@ -42,9 +42,11 @@ namespace ApiFichaAcademia.Business
 			return modelDTO;
 		}
 
-		public Task<TeacherDTO> Delete(int id)
+		public async Task<TeacherDTO> Delete(int id)
 		{
-			throw new NotImplementedException();
+			if (await GetById(id) == null) return null;
+
+			return _mapper.Map<TeacherDTO>(await _teacherRepository.Delete(id));
 		}
 
 		public async Task<TeacherDTO> Update(TeacherDTO model)

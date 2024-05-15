@@ -52,9 +52,17 @@ namespace ApiFichaAcademia.Repository
 
         }
 
-        public Task<Teacher> Delete(int id)
+        public async Task<Teacher> Delete(int id)
         {
-            throw new NotImplementedException();
+            var result = await GetById(id);
+            if (result != null)
+            {
+                _dbContext.Set<Teacher>().Remove(result);
+                await _dbContext.SaveChangesAsync();
+                return result;
+            }
+            else
+                return null;
         }
 
         #endregion

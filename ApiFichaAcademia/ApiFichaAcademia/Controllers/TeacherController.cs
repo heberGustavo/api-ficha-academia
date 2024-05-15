@@ -1,4 +1,5 @@
 using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiFichaAcademia.Controllers
@@ -27,6 +28,13 @@ namespace ApiFichaAcademia.Controllers
 			var result = await _teacherBusiness.GetById(id);
 			if (result == null || result.Id <= 0) return NotFound();
 
+			return Ok(result);
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> Create([FromBody] TeacherDTO model)
+		{
+			var result = await _teacherBusiness.Create(model);
 			return Ok(result);
 		}
 	}

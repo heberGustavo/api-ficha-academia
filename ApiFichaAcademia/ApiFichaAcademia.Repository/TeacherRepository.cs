@@ -23,9 +23,12 @@ namespace ApiFichaAcademia.Repository
 
         #region WRITE
 
-        public Task<Teacher> Create(Teacher teacher)
+        public async Task<Teacher> Create(Teacher teacher)
         {
-            throw new NotImplementedException();
+            await _dbContext.Set<Teacher>().AddAsync(teacher);
+            await _dbContext.SaveChangesAsync();
+
+            return teacher;
         }
 
         public Task<Teacher> Update(Teacher teacher)

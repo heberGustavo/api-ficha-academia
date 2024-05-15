@@ -35,9 +35,11 @@ namespace ApiFichaAcademia.Business
 
 		#region WRITE
 
-		public Task<TeacherDTO> Create(TeacherDTO model)
+		public async Task<TeacherDTO> Create(TeacherDTO model)
 		{
-			throw new NotImplementedException();
+			var modelEntity = _mapper.Map<Teacher>(model);
+			var modelDTO = _mapper.Map<TeacherDTO>(await _teacherRepository.Create(modelEntity));
+			return modelDTO;
 		}
 
 		public Task<TeacherDTO> Delete(int id)

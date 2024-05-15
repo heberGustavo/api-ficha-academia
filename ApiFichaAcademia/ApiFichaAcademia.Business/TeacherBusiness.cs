@@ -47,9 +47,12 @@ namespace ApiFichaAcademia.Business
 			throw new NotImplementedException();
 		}
 
-		public Task<TeacherDTO> Update(TeacherDTO model)
+		public async Task<TeacherDTO> Update(TeacherDTO model)
 		{
-			throw new NotImplementedException();
+			if (await GetById(model.Id) == null) return null;
+
+			var modelEntity = _mapper.Map<Teacher>(model);
+			return _mapper.Map<TeacherDTO>(await _teacherRepository.Update(modelEntity));
 		}
 
 		#endregion

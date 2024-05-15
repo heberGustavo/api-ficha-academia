@@ -31,9 +31,25 @@ namespace ApiFichaAcademia.Repository
             return teacher;
         }
 
-        public Task<Teacher> Update(Teacher teacher)
+        public async Task<Teacher> Update(Teacher teacher)
         {
-            throw new NotImplementedException();
+            var result = await GetById(teacher.Id);
+            if (result != null)
+            {
+                try
+                {
+                    _dbContext.Set<Teacher>().Entry(result).CurrentValues.SetValues(teacher);
+                    await _dbContext.SaveChangesAsync();
+                    return teacher;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+            else 
+                return null;
+
         }
 
         public Task<Teacher> Delete(int id)

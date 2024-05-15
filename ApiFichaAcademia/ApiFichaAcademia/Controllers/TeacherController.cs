@@ -37,5 +37,14 @@ namespace ApiFichaAcademia.Controllers
 			var result = await _teacherBusiness.Create(model);
 			return Ok(result);
 		}
+
+		[HttpPut]
+		public async Task<ActionResult> Update([FromBody] TeacherDTO model)
+		{
+			var result = await _teacherBusiness.Update(model);
+			if (result == null || result.Id <= 0) return NotFound();
+
+			return Ok(result);
+		}
 	}
 }

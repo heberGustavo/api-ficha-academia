@@ -1,4 +1,6 @@
 ﻿using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common.Utils;
+using ApiFichaAcademia.Common.Utils.ResultInfo;
 using ApiFichaAcademia.Models.DTO;
 using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
@@ -6,7 +8,7 @@ using AutoMapper;
 
 namespace ApiFichaAcademia.Business
 {
-	public class TeacherBusiness : ITeacherBusiness
+    public class TeacherBusiness : ITeacherBusiness
 	{
 		private readonly ITeacherRepository _teacherRepository;
 		private readonly IMapper _mapper;
@@ -19,14 +21,26 @@ namespace ApiFichaAcademia.Business
 
 		#region READ
 
-		public async Task<List<TeacherDTO>> GetAll()
+		public async Task<ResultInfoList<TeacherDTO>> GetAll()
 		{
-			return _mapper.Map<List<TeacherDTO>>(await _teacherRepository.GetAll());
+			var result = new ResultInfoList<TeacherDTO>();
+
+			try
+			{
+				result.Data = _mapper.Map<List<TeacherDTO>>(await _teacherRepository.GetAll());
+				result.QuantData = result.Data.Count;
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoList<TeacherDTO>(false, 0, ex.Message);
+			}
+
+			return result;
 		}
 
 		public async Task<TeacherDTO> GetById(int id)
 		{
-			if (id <= 0) return new TeacherDTO();
+			if (id <= 0) return null;
 
 			return _mapper.Map<TeacherDTO>(await _teacherRepository.GetById(id));
 		}

@@ -26,7 +26,7 @@ namespace ApiFichaAcademia.Controllers
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _teacherBusiness.GetById(id);
-			if (result == null || result.Id <= 0) return NotFound();
+			if (result == null) return NotFound();
 
 			return Ok(result);
 		}

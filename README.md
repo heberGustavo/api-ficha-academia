@@ -2,7 +2,7 @@
 
 Routines: 
 
-1- Teacher
+1- Teacher - ok
 
 2- Person (Client) 
 

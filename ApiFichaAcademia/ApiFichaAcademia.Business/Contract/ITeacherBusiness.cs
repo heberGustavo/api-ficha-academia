@@ -10,6 +10,6 @@ namespace ApiFichaAcademia.Business.Contract
 		Task<ResultInfoList<TeacherDTO>> GetAll();
 		Task<ResultInfoItem<TeacherDTO>> Create(TeacherDTO model);
 		Task<ResultInfoItem<TeacherDTO>> Update(TeacherDTO model);
-		Task<TeacherDTO> Delete(int id);
+		Task<ResultInfoItem<TeacherDTO>> Delete(int id);
 	}
 }

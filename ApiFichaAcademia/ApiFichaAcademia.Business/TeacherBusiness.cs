@@ -78,13 +78,6 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public async Task<TeacherDTO> Delete(int id)
-		{
-			if (await GetById(id) == null) return null;
-
-			return _mapper.Map<TeacherDTO>(await _teacherRepository.Delete(id));
-		}
-
 		public async Task<ResultInfoItem<TeacherDTO>> Update(TeacherDTO model)
 		{
 			var result = new ResultInfoItem<TeacherDTO>();
@@ -96,6 +89,26 @@ namespace ApiFichaAcademia.Business
 
 				var modelEntity = _mapper.Map<Teacher>(model);
 				result.Data = _mapper.Map<TeacherDTO>(await _teacherRepository.Update(modelEntity));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<TeacherDTO>(false, ex.Message);
+			}
+
+			return result;
+		}
+
+		public async Task<ResultInfoItem<TeacherDTO>> Delete(int id)
+		{
+			var result = new ResultInfoItem<TeacherDTO>();
+
+			try
+			{
+				var selectItem = GetById(id).Result.Data;
+				if (selectItem == null) return result;
+
+				_mapper.Map<TeacherDTO>(await _teacherRepository.Delete(id));
+				result.Message = $"Teacher {selectItem.Name} was deleted!";
 			}
 			catch (Exception ex)
 			{

@@ -68,7 +68,7 @@ namespace ApiFichaAcademia.Repository
             if (result != null)
             {
                 _dbContext.Set<Teacher>().Remove(result);
-                await _dbContext.SaveChangesAsync();
+				await _dbContext.SaveChangesAsync();
                 return result;
             }
             else

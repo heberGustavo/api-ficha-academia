@@ -38,22 +38,44 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public async Task<TeacherDTO> GetById(int id)
+		public async Task<ResultInfoItem<TeacherDTO>> GetById(int id)
 		{
-			if (id <= 0) return null;
+			var result = new ResultInfoItem<TeacherDTO>();
 
-			return _mapper.Map<TeacherDTO>(await _teacherRepository.GetById(id));
+			if (id <= 0) return result;
+
+			try
+			{
+				result.Data = _mapper.Map<TeacherDTO>(await _teacherRepository.GetById(id));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<TeacherDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		#endregion
 
 		#region WRITE
 
-		public async Task<TeacherDTO> Create(TeacherDTO model)
+		public async Task<ResultInfoItem<TeacherDTO>> Create(TeacherDTO model)
 		{
-			var modelEntity = _mapper.Map<Teacher>(model);
-			var modelDTO = _mapper.Map<TeacherDTO>(await _teacherRepository.Create(modelEntity));
-			return modelDTO;
+			var result = new ResultInfoItem<TeacherDTO>();
+
+			try
+			{
+				var modelEntity = _mapper.Map<Teacher>(model);
+				var modelDTO = _mapper.Map<TeacherDTO>(await _teacherRepository.Create(modelEntity));
+				result.Data = modelDTO;
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<TeacherDTO>(false, ex.Message);
+			}
+			
+			return result;
 		}
 
 		public async Task<TeacherDTO> Delete(int id)

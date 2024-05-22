@@ -26,7 +26,7 @@ namespace ApiFichaAcademia.Controllers
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _teacherBusiness.GetById(id);
-			if (result == null) return NotFound();
+			if (result.Data == null) return NotFound();
 
 			return Ok(result);
 		}
@@ -35,6 +35,7 @@ namespace ApiFichaAcademia.Controllers
 		public async Task<ActionResult> Create([FromBody] TeacherDTO model)
 		{
 			var result = await _teacherBusiness.Create(model);
+			if (result.Data == null || result.Data.Id <= 0) return BadRequest();
 			return Ok(result);
 		}
 

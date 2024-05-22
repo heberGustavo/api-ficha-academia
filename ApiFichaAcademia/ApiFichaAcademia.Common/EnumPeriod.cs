@@ -2,8 +2,8 @@
 {
 	public enum EnumPeriod
 	{
-		Morning = 0,
-		Afternoon = 1,
-		Night = 2
+		Morning = 1,
+		Afternoon = 2,
+		Night = 3
 	}
 }

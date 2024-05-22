@@ -3,7 +3,7 @@ using ApiFichaAcademia.Repository.Contract.Base;
 
 namespace ApiFichaAcademia.Repository.Contract
 {
-	public interface ITeacherRepository : IBaseRepository<Teacher>
+	public interface IClientRepository : IBaseRepository<Client>
 	{
 	}
 }

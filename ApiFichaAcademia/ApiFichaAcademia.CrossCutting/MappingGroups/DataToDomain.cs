@@ -9,6 +9,7 @@ namespace ApiFichaAcademia.CrossCutting.MappingGroups
         public DataToDomain()
         {
             CreateMap<Teacher, TeacherDTO>();
+            CreateMap<Client, ClientDTO>();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace ApiFichaAcademia.CrossCutting.DependencyGroups
 		public static void Register(IServiceCollection serviceCollection)
 		{
 			serviceCollection.AddScoped<ITeacherRepository, TeacherRepository>();
+			serviceCollection.AddScoped<IClientRepository, ClientRepository>();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 {
 	public interface IBaseRepository<T> where T : class
 	{
-		Task<T> GetAll();
+		Task<List<T>> GetAll();
 		Task<T> GetById(int id);
 
 		Task<T> Create(T teacher);

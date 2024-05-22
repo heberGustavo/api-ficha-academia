@@ -85,12 +85,24 @@ namespace ApiFichaAcademia.Business
 			return _mapper.Map<TeacherDTO>(await _teacherRepository.Delete(id));
 		}
 
-		public async Task<TeacherDTO> Update(TeacherDTO model)
+		public async Task<ResultInfoItem<TeacherDTO>> Update(TeacherDTO model)
 		{
-			if (await GetById(model.Id) == null) return null;
+			var result = new ResultInfoItem<TeacherDTO>();
 
-			var modelEntity = _mapper.Map<Teacher>(model);
-			return _mapper.Map<TeacherDTO>(await _teacherRepository.Update(modelEntity));
+			try
+			{
+				var selectItem = GetById(model.Id).Result.Data;
+				if (selectItem == null) return result;
+
+				var modelEntity = _mapper.Map<Teacher>(model);
+				result.Data = _mapper.Map<TeacherDTO>(await _teacherRepository.Update(modelEntity));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<TeacherDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		#endregion

@@ -43,7 +43,7 @@ namespace ApiFichaAcademia.Controllers
 		public async Task<ActionResult> Update([FromBody] TeacherDTO model)
 		{
 			var result = await _teacherBusiness.Update(model);
-			if (result == null || result.Id <= 0) return NotFound();
+			if (result.Data == null || result.Data.Id <= 0) return NotFound();
 
 			return Ok(result);
 		}

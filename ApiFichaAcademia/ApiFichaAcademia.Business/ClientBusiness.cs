@@ -74,9 +74,31 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public Task<ResultInfoItem<ClientDTO>> Update(ClientDTO model)
+		public async Task<ResultInfoItem<ClientDTO>> Update(ClientDTO model)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ClientDTO>();
+
+			try
+			{
+				var resultItem = await GetById(model.Id);
+
+				if (!resultItem.Status) 
+					return resultItem;
+				else if (resultItem.Data == null)
+				{
+					resultItem.Message = "Item not found, please verify and try again!";
+					return resultItem;
+				}
+
+				var entity = _mapper.Map<Client>(model);
+				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.Update(entity));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ClientDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		public Task<ResultInfoItem<ClientDTO>> Delete(int id)

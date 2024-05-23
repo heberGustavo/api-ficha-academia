@@ -57,9 +57,24 @@ namespace ApiFichaAcademia.Repository
 			}
 		}
 
-		public Task<Client> Update(Client client)
+		public async Task<Client> Update(Client client)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var resultItem = await GetById(client.Id);
+				if(resultItem != null)
+				{
+					_dbContext.Set<Client>().Entry(resultItem).CurrentValues.SetValues(client);
+					await _dbContext.SaveChangesAsync();
+					return client;
+				}
+
+				return null;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		public Task<Client> Delete(int id)

@@ -1,4 +1,5 @@
 using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet]
+		[ProducesResponseType(200, Type = typeof(ResultInfoList<TeacherDTO>))]
 		public async Task<ActionResult> GetAll()
 		{
 			var result = await _teacherBusiness.GetAll();
@@ -23,6 +25,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<TeacherDTO>))]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _teacherBusiness.GetById(id);
@@ -32,6 +36,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<TeacherDTO>))]
+		[ProducesResponseType(400)]
 		public async Task<ActionResult> Create([FromBody] TeacherDTO model)
 		{
 			var result = await _teacherBusiness.Create(model);
@@ -40,6 +46,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPut]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<TeacherDTO>))]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Update([FromBody] TeacherDTO model)
 		{
 			var result = await _teacherBusiness.Update(model);
@@ -49,6 +57,7 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<TeacherDTO>))]
 		public async Task<ActionResult> Delete(int id)
 		{
 			var result = await _teacherBusiness.Delete(id);

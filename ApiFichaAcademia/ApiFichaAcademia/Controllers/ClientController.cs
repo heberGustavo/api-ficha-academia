@@ -1,4 +1,5 @@
 ﻿using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet]
-		[ProducesResponseType(200, Type = typeof(List<ClientDTO>))]
+		[ProducesResponseType(200, Type = typeof(ResultInfoList<List<ClientDTO>>))]
 		public async Task<ActionResult> GetAll()
 		{
 			var result = await _clientBusiness.GetAll();
@@ -25,7 +26,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet("{id}")]
-		[ProducesResponseType(200, Type = typeof(ClientDTO))]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ClientDTO>))]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _clientBusiness.GetById(id);
@@ -35,6 +37,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ClientDTO>))]
+		[ProducesResponseType(400)]
 		public async Task<ActionResult> Create([FromBody] ClientDTO model)
 		{
 			var result = await _clientBusiness.Create(model);
@@ -44,6 +48,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPut]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ClientDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Update([FromBody] ClientDTO model)
 		{
 			var result = await _clientBusiness.Update(model);

@@ -1,15 +1,30 @@
 ﻿using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiFichaAcademia.Repository
 {
 	public class ClientRepository : IClientRepository
 	{
+		private readonly DbContext _dbContext;
+
+		public ClientRepository(DbContext dbContext)
+		{
+			_dbContext = dbContext;
+		}
+
 		#region READ
 
-		public Task<List<Client>> GetAll()
+		public async Task<List<Client>> GetAll()
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return await _dbContext.Set<Client>().ToListAsync();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		public Task<Client> GetById(int id)

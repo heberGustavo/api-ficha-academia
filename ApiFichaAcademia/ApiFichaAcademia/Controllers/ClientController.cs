@@ -14,5 +14,12 @@ namespace ApiFichaAcademia.Controllers
 		{
 			_clientBusiness = clientBusiness;
 		}
+
+		[HttpGet]
+		public async Task<ActionResult> GetAll()
+		{
+			var result = await _clientBusiness.GetAll();
+			return Ok(result);
+		}
 	}
 }

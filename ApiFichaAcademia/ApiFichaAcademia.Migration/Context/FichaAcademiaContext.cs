@@ -8,5 +8,6 @@ namespace ApiFichaAcademia.Migrations.Context
         public FichaAcademiaContext(DbContextOptions<FichaAcademiaContext> option) : base(option) { }
 
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Client> Clients { get; set; }
     }
 }

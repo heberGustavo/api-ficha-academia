@@ -1,16 +1,39 @@
 ﻿using ApiFichaAcademia.Business.Contract;
 using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
+using ApiFichaAcademia.Repository.Contract;
+using AutoMapper;
 
 namespace ApiFichaAcademia.Business
 {
 	public class ClientBusiness : IClientBusiness
 	{
+		private readonly IClientRepository _clientRepository;
+		private readonly IMapper _mapper;
+
+		public ClientBusiness(IClientRepository clientRepository, IMapper mapper)
+		{
+			_clientRepository = clientRepository;
+			_mapper = mapper;
+		}
+
 		#region READ
 
-		public Task<ResultInfoList<ClientDTO>> GetAll()
+		public async Task<ResultInfoList<ClientDTO>> GetAll()
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoList<ClientDTO>();
+
+			try
+			{
+				result.Data =  _mapper.Map<List<ClientDTO>>(await _clientRepository.GetAll());
+				result.QuantData = result.Data.Count;
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoList<ClientDTO>(false, 0, ex.Message);
+			}
+
+			return result;
 		}
 
 		public Task<ResultInfoItem<ClientDTO>> GetById(int id)

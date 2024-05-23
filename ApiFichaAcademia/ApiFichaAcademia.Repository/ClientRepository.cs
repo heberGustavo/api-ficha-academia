@@ -29,19 +29,35 @@ namespace ApiFichaAcademia.Repository
 
 		public Task<Client> GetById(int id)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return _dbContext.Set<Client>().FirstOrDefaultAsync(x => x.Id == id);
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		#endregion
 
 		#region WRITE
 
-		public Task<Client> Create(Client teacher)
+		public async Task<Client> Create(Client client)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				await _dbContext.Set<Client>().AddAsync(client);
+				await _dbContext.SaveChangesAsync();
+				return client;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
-		public Task<Client> Update(Client teacher)
+		public Task<Client> Update(Client client)
 		{
 			throw new NotImplementedException();
 		}

@@ -1,6 +1,7 @@
 ﻿using ApiFichaAcademia.Business.Contract;
 using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
+using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using AutoMapper;
 
@@ -36,18 +37,41 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public Task<ResultInfoItem<ClientDTO>> GetById(int id)
+		public async Task<ResultInfoItem<ClientDTO>> GetById(int id)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ClientDTO>();
+
+			try
+			{
+				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.GetById(id));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ClientDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		#endregion
 
 		#region WRITE
 
-		public Task<ResultInfoItem<ClientDTO>> Create(ClientDTO model)
+		public async Task<ResultInfoItem<ClientDTO>> Create(ClientDTO model)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ClientDTO>();
+
+			try
+			{
+				var entity = _mapper.Map<Client>(model);
+				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.Create(entity));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ClientDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		public Task<ResultInfoItem<ClientDTO>> Update(ClientDTO model)

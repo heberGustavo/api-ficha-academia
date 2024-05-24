@@ -101,9 +101,26 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public Task<ResultInfoItem<ClientDTO>> Delete(int id)
+		public async Task<ResultInfoItem<ClientDTO>> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ClientDTO>();
+
+			try
+			{
+				var resultItem = await GetById(id);
+				if (!resultItem.Status)
+					return resultItem;
+				else if(resultItem.Data == null)
+					return resultItem;
+
+				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.Delete(id));
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ClientDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		#endregion

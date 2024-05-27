@@ -18,6 +18,7 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet]
+		[ProducesResponseType(200, Type = typeof(ResultInfoList<ObjectiveDTO>))]
 		public async Task<ActionResult> GetAll()
 		{
 			var result = await _objectiveBusiness.GetAll();
@@ -27,6 +28,7 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ObjectiveDTO>))]
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _objectiveBusiness.GetById(id);

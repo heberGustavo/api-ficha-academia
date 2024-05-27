@@ -10,6 +10,7 @@ namespace ApiFichaAcademia.CrossCutting.MappingGroups
         {
             CreateMap<TeacherDTO, Teacher>();
             CreateMap<ClientDTO, Client>();
+            CreateMap<ObjectiveDTO, Objective>();
         }
     }
 }

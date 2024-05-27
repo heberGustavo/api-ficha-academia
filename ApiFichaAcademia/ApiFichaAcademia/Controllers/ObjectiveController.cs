@@ -1,4 +1,5 @@
 ﻿using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,13 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ObjectiveDTO>))]
 		public async Task<ActionResult> Create([FromBody] ObjectiveDTO model)
 		{
-			throw new NotImplementedException();
+			var result = await _objectiveBusiness.Create(model);
+			if(!result.Status) return BadRequest(result);
+
+			return Ok(result);
 		}
 
 	}

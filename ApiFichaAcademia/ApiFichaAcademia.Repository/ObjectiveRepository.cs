@@ -1,5 +1,6 @@
 ﻿using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace ApiFichaAcademia.Repository
 {
 	public class ObjectiveRepository : IObjectiveRepository
 	{
+		private readonly DbContext _dbContext;
+
+		public ObjectiveRepository(DbContext dbContext)
+		{
+			_dbContext = dbContext;
+		}
+
 		#region READ
 
 		public Task<List<Objective>> GetAll()
@@ -26,9 +34,18 @@ namespace ApiFichaAcademia.Repository
 
 		#region WRITE
 
-		public Task<Objective> Create(Objective model)
+		public async Task<Objective> Create(Objective model)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				await _dbContext.Set<Objective>().AddAsync(model);
+				await _dbContext.SaveChangesAsync();
+				return model;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		public Task<Objective> Update(Objective model)

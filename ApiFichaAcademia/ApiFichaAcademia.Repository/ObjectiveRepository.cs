@@ -20,9 +20,9 @@ namespace ApiFichaAcademia.Repository
 
 		#region READ
 
-		public Task<List<Objective>> GetAll()
+		public async Task<List<Objective>> GetAll()
 		{
-			throw new NotImplementedException();
+			return await _dbContext.Set<Objective>().ToListAsync();
 		}
 
 		public Task<Objective> GetById(int id)

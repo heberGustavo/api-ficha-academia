@@ -26,9 +26,21 @@ namespace ApiFichaAcademia.Business
 
 		#region READ
 
-		public Task<ResultInfoList<ObjectiveDTO>> GetAll()
+		public async Task<ResultInfoList<ObjectiveDTO>> GetAll()
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoList<ObjectiveDTO>();
+
+			try
+			{
+				result.Data = _mapper.Map<List<ObjectiveDTO>>(await _objectiveRepository.GetAll());
+				result.QuantData = result.Data.Count;
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoList<ObjectiveDTO>(false, 0, ex.Message);
+			}
+
+			return result;
 		}
 
 		public Task<ResultInfoItem<ObjectiveDTO>> GetById(int id)

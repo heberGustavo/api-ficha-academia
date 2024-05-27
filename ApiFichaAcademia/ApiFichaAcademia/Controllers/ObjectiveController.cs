@@ -17,6 +17,13 @@ namespace ApiFichaAcademia.Controllers
 			_objectiveBusiness = objectiveBusiness;
 		}
 
+		[HttpGet]
+		public async Task<ActionResult> GetAll()
+		{
+			var result = await _objectiveBusiness.GetAll();
+			return Ok(result);
+		}
+
 		[HttpPost]
 		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ObjectiveDTO>))]
 		public async Task<ActionResult> Create([FromBody] ObjectiveDTO model)

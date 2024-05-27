@@ -4,7 +4,7 @@ Routines:
 
 1- Teacher - ok
 
-2- Person (Client) 
+2- Person (Client) - ok
 
 3- Objective Person 
 

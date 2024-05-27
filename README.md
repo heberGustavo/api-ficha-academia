@@ -6,7 +6,7 @@ Routines:
 
 2- Person (Client) - ok
 
-3- Objective Person 
+3- Objective Person - ok
 
 4- Exercises 
 

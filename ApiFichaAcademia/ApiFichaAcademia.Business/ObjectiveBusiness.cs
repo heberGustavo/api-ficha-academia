@@ -43,9 +43,23 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public Task<ResultInfoItem<ObjectiveDTO>> GetById(int id)
+		public async Task<ResultInfoItem<ObjectiveDTO>> GetById(int id)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ObjectiveDTO>();
+
+			try
+			{
+				if (id <= 0) return result;
+
+				result.Data = _mapper.Map<ObjectiveDTO>(await _objectiveRepository.GetById(id));
+				result = ValidateHelperResult.ValidateResultItem(result);
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ObjectiveDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		#endregion

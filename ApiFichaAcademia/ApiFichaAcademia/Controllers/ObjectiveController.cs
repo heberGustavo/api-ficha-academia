@@ -21,6 +21,20 @@ namespace ApiFichaAcademia.Controllers
 		public async Task<ActionResult> GetAll()
 		{
 			var result = await _objectiveBusiness.GetAll();
+			if(!result.Status) return BadRequest(result);
+
+			return Ok(result);
+		}
+
+		[HttpGet("{id}")]
+		public async Task<ActionResult> GetById(int id)
+		{
+			var result = await _objectiveBusiness.GetById(id);
+			if (!result.Status)
+				return BadRequest(result);
+			else if (result.Data == null)
+				return NotFound(result);
+
 			return Ok(result);
 		}
 

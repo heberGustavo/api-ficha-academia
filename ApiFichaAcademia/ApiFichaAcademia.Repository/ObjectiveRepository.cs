@@ -25,9 +25,16 @@ namespace ApiFichaAcademia.Repository
 			return await _dbContext.Set<Objective>().ToListAsync();
 		}
 
-		public Task<Objective> GetById(int id)
+		public async Task<Objective> GetById(int id)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return await _dbContext.Set<Objective>().FirstOrDefaultAsync(x => x.Id == id);
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		#endregion

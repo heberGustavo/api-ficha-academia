@@ -1,4 +1,6 @@
 ﻿using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common;
+using ApiFichaAcademia.Common.Helpers;
 using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
 using ApiFichaAcademia.Models.Model;
@@ -44,6 +46,8 @@ namespace ApiFichaAcademia.Business
 			try
 			{
 				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.GetById(id));
+				result = ValidateHelperResult.ValidateResultItem(result);
+				if (!result.Status) return result;
 			}
 			catch (Exception ex)
 			{
@@ -81,17 +85,12 @@ namespace ApiFichaAcademia.Business
 			try
 			{
 				var resultItem = await GetById(model.Id);
-
-				if (!resultItem.Status) 
-					return resultItem;
-				else if (resultItem.Data == null)
-				{
-					resultItem.Message = "Item not found, please verify and try again!";
-					return resultItem;
-				}
+				resultItem = ValidateHelperResult.ValidateResultItem(resultItem);
+				if (!resultItem.Status) return resultItem;
 
 				var entity = _mapper.Map<Client>(model);
 				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.Update(entity));
+				result = ValidateHelperResult.ValidateResultItem(result);
 			}
 			catch (Exception ex)
 			{

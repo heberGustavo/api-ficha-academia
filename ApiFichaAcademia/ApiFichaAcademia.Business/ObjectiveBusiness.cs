@@ -85,9 +85,28 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public Task<ResultInfoItem<ObjectiveDTO>> Update(ObjectiveDTO model)
+		public async Task<ResultInfoItem<ObjectiveDTO>> Update(ObjectiveDTO model)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ObjectiveDTO>();
+
+			try
+			{
+				var resultItem = await _objectiveRepository.GetById(model.Id);
+				if (resultItem != null)
+				{
+					var entity = _mapper.Map<Objective>(model);
+					result.Data = _mapper.Map<ObjectiveDTO>(await _objectiveRepository.Update(entity));
+					result = ValidateHelperResult.ValidateResultItem(result);
+				}
+				else
+					result = ValidateHelperResult.ValidateResultItem(result);
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ObjectiveDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		public Task<ResultInfoItem<ObjectiveDTO>> Delete(int id)

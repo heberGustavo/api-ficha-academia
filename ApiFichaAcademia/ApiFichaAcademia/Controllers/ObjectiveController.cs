@@ -50,5 +50,17 @@ namespace ApiFichaAcademia.Controllers
 			return Ok(result);
 		}
 
+		[HttpPut]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ObjectiveDTO>))]
+		public async Task<ActionResult> Update([FromBody] ObjectiveDTO model)
+		{
+			var result = await _objectiveBusiness.Update(model);
+			if(!result.Status) 
+				return BadRequest(result);
+			else if(result.Data == null)
+				return NotFound(result);
+
+			return Ok(result);
+		}
 	}
 }

@@ -55,9 +55,17 @@ namespace ApiFichaAcademia.Repository
 			}
 		}
 
-		public Task<Objective> Update(Objective model)
+		public async Task<Objective> Update(Objective model)
 		{
-			throw new NotImplementedException();
+			var resultItem = await GetById(model.Id);
+			if (resultItem != null)
+			{
+				_dbContext.Set<Objective>().Entry(resultItem).CurrentValues.SetValues(model);
+				await _dbContext.SaveChangesAsync();
+				return model;
+			}
+
+			return null;
 		}
 
 		public Task<Objective> Delete(int id)

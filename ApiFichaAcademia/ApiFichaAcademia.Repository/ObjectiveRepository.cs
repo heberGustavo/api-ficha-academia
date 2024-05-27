@@ -68,9 +68,17 @@ namespace ApiFichaAcademia.Repository
 			return null;
 		}
 
-		public Task<Objective> Delete(int id)
+		public async Task<Objective> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var resultItem = await GetById(id);
+			if(resultItem != null)
+			{
+				_dbContext.Remove(resultItem);
+				await _dbContext.SaveChangesAsync();
+				return resultItem;
+			}
+
+			return null;
 		}
 
 		#endregion

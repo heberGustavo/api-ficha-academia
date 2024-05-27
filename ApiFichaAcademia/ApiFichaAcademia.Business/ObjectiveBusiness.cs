@@ -109,9 +109,27 @@ namespace ApiFichaAcademia.Business
 			return result;
 		}
 
-		public Task<ResultInfoItem<ObjectiveDTO>> Delete(int id)
+		public async Task<ResultInfoItem<ObjectiveDTO>> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var result = new ResultInfoItem<ObjectiveDTO>();
+
+			try
+			{
+				var resultItem = await _objectiveRepository.GetById(id);
+				if (resultItem != null)
+				{
+					result.Data = _mapper.Map<ObjectiveDTO>(await _objectiveRepository.Delete(id));
+					result = ValidateHelperResult.ValidateResultItem(result);
+				}
+				else
+					result = ValidateHelperResult.ValidateResultItem(result);
+			}
+			catch (Exception ex)
+			{
+				result = new ResultInfoItem<ObjectiveDTO>(false, ex.Message);
+			}
+
+			return result;
 		}
 
 		#endregion

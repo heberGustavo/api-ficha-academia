@@ -1,4 +1,5 @@
 ﻿using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
 using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
@@ -14,12 +15,12 @@ namespace ApiFichaAcademia.Business
 	{
 		#region READ
 
-		public Task<List<ObjectiveDTO>> GetAll()
+		public Task<ResultInfoList<ObjectiveDTO>> GetAll()
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ObjectiveDTO> GetById(int id)
+		public Task<ResultInfoItem<ObjectiveDTO>> GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
@@ -28,17 +29,17 @@ namespace ApiFichaAcademia.Business
 
 		#region WRITE
 
-		public Task<ObjectiveDTO> Create(ObjectiveDTO model)
+		public Task<ResultInfoItem<ObjectiveDTO>> Create(ObjectiveDTO model)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ObjectiveDTO> Update(ObjectiveDTO model)
+		public Task<ResultInfoItem<ObjectiveDTO>> Update(ObjectiveDTO model)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ObjectiveDTO> Delete(int id)
+		public Task<ResultInfoItem<ObjectiveDTO>> Delete(int id)
 		{
 			throw new NotImplementedException();
 		}

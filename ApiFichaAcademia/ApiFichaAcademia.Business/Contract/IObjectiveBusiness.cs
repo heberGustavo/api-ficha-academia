@@ -1,13 +1,14 @@
-﻿using ApiFichaAcademia.Models.DTO;
+﻿using ApiFichaAcademia.Common.Utils;
+using ApiFichaAcademia.Models.DTO;
 
 namespace ApiFichaAcademia.Business.Contract
 {
 	public interface IObjectiveBusiness
 	{
-		Task<ObjectiveDTO> GetById(int id);
-		Task<List<ObjectiveDTO>> GetAll();
-		Task<ObjectiveDTO> Create(ObjectiveDTO model);
-		Task<ObjectiveDTO> Update(ObjectiveDTO model);
-		Task<ObjectiveDTO> Delete(int id);
+		Task<ResultInfoItem<ObjectiveDTO>> GetById(int id);
+		Task<ResultInfoList<ObjectiveDTO>> GetAll();
+		Task<ResultInfoItem<ObjectiveDTO>> Create(ObjectiveDTO model);
+		Task<ResultInfoItem<ObjectiveDTO>> Update(ObjectiveDTO model);
+		Task<ResultInfoItem<ObjectiveDTO>> Delete(int id);
 	}
 }

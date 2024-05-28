@@ -3,6 +3,7 @@ using ApiFichaAcademia.Migrations.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiFichaAcademia.Migrations.Migrations
 {
     [DbContext(typeof(FichaAcademiaContext))]
-    partial class FichaAcademiaContextModelSnapshot : ModelSnapshot
+    [Migration("20240528125648_removing-fk-in-Exercise")]
+    partial class removingfkinExercise
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,17 +59,12 @@ namespace ApiFichaAcademia.Migrations.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdLevel")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdLevel");
 
                     b.ToTable("TB_EXERCISE");
                 });
@@ -135,17 +133,6 @@ namespace ApiFichaAcademia.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TB_TEACHER");
-                });
-
-            modelBuilder.Entity("ApiFichaAcademia.Models.Model.Exercise", b =>
-                {
-                    b.HasOne("ApiFichaAcademia.Models.Model.LevelExercise", "LevelExercise")
-                        .WithMany()
-                        .HasForeignKey("IdLevel")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LevelExercise");
                 });
 #pragma warning restore 612, 618
         }

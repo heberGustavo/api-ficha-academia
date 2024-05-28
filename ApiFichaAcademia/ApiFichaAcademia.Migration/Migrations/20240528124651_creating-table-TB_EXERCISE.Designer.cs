@@ -3,6 +3,7 @@ using ApiFichaAcademia.Migrations.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiFichaAcademia.Migrations.Migrations
 {
     [DbContext(typeof(FichaAcademiaContext))]
-    partial class FichaAcademiaContextModelSnapshot : ModelSnapshot
+    [Migration("20240528124651_creating-table-TB_EXERCISE")]
+    partial class creatingtableTB_EXERCISE
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +62,9 @@ namespace ApiFichaAcademia.Migrations.Migrations
                     b.Property<int>("IdLevel")
                         .HasColumnType("int");
 
+                    b.Property<int>("LevelExerciceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -66,7 +72,7 @@ namespace ApiFichaAcademia.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdLevel");
+                    b.HasIndex("LevelExerciceId");
 
                     b.ToTable("TB_EXERCISE");
                 });
@@ -141,7 +147,7 @@ namespace ApiFichaAcademia.Migrations.Migrations
                 {
                     b.HasOne("ApiFichaAcademia.Models.Model.LevelExercise", "LevelExercise")
                         .WithMany()
-                        .HasForeignKey("IdLevel")
+                        .HasForeignKey("LevelExerciceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

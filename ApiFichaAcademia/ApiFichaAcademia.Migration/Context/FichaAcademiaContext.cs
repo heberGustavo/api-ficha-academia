@@ -10,5 +10,6 @@ namespace ApiFichaAcademia.Migrations.Context
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Objective> Objectives { get; set; }
+        public DbSet<LevelExercise> LevelExercise { get; set; }
     }
 }

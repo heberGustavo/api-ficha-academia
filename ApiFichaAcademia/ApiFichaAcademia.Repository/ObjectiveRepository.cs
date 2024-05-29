@@ -1,4 +1,5 @@
-﻿using ApiFichaAcademia.Models.Model;
+﻿using ApiFichaAcademia.Migrations.Context;
+using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,9 +12,9 @@ namespace ApiFichaAcademia.Repository
 {
 	public class ObjectiveRepository : IObjectiveRepository
 	{
-		private readonly DbContext _dbContext;
+		private readonly FichaAcademiaContext _dbContext;
 
-		public ObjectiveRepository(DbContext dbContext)
+		public ObjectiveRepository(FichaAcademiaContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
@@ -22,14 +23,14 @@ namespace ApiFichaAcademia.Repository
 
 		public async Task<List<Objective>> GetAll()
 		{
-			return await _dbContext.Set<Objective>().ToListAsync();
+			return await _dbContext.Objectives.ToListAsync();
 		}
 
 		public async Task<Objective> GetById(int id)
 		{
 			try
 			{
-				return await _dbContext.Set<Objective>().FirstOrDefaultAsync(x => x.Id == id);
+				return await _dbContext.Objectives.FirstOrDefaultAsync(x => x.Id == id);
 			}
 			catch (Exception)
 			{
@@ -45,7 +46,7 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				await _dbContext.Set<Objective>().AddAsync(model);
+				await _dbContext.Objectives.AddAsync(model);
 				await _dbContext.SaveChangesAsync();
 				return model;
 			}
@@ -60,7 +61,7 @@ namespace ApiFichaAcademia.Repository
 			var resultItem = await GetById(model.Id);
 			if (resultItem != null)
 			{
-				_dbContext.Set<Objective>().Entry(resultItem).CurrentValues.SetValues(model);
+				_dbContext.Objectives.Entry(resultItem).CurrentValues.SetValues(model);
 				await _dbContext.SaveChangesAsync();
 				return model;
 			}

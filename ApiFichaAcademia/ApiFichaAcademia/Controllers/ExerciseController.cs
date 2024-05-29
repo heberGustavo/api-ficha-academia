@@ -28,5 +28,14 @@ namespace ApiFichaAcademia.Controllers
 
 			return Ok(result);
 		}
+
+		[HttpPost]
+		public async Task<ActionResult> Create([FromBody] ExerciseDTO model)
+		{
+			var result = await _exerciseBusiness.Create(model);
+			if(!result.Status) return BadRequest(result);
+
+			return Ok(result);
+		}
 	}
 }

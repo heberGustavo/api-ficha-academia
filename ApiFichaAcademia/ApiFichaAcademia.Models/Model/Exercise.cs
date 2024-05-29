@@ -11,7 +11,9 @@ namespace ApiFichaAcademia.Models.Model
 
         [Required, StringLength(50)]
         public string Name { get; set; }
-        public int IdLevel { get; set; }
+
+		[Required, Range(1, 3)]
+		public int IdLevel { get; set; }
 
         [ForeignKey("IdLevel")]
         public virtual LevelExercise LevelExercise { get; set; }

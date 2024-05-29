@@ -1,4 +1,5 @@
-﻿using ApiFichaAcademia.Models.Model;
+﻿using ApiFichaAcademia.Migrations.Context;
+using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -7,9 +8,9 @@ namespace ApiFichaAcademia.Repository
 {
 	public class ExerciseRepository : IExerciseRepository
 	{
-		private readonly DbContext _dbContext;
+		private readonly FichaAcademiaContext _dbContext;
 
-		public ExerciseRepository(DbContext dbContext)
+		public ExerciseRepository(FichaAcademiaContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
@@ -20,7 +21,7 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				return await _dbContext.Set<Exercise>().ToListAsync();
+				return await _dbContext.Exercises.ToListAsync();
 			}
 			catch (Exception)
 			{
@@ -32,7 +33,7 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				return await _dbContext.Set<Exercise>().FirstOrDefaultAsync(x => x.Id == id);
+				return await _dbContext.Exercises.FirstOrDefaultAsync(x => x.Id == id);
 			}
 			catch (Exception)
 			{
@@ -48,7 +49,7 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				await _dbContext.Set<Exercise>().AddAsync(exercise);
+				await _dbContext.Exercises.AddAsync(exercise);
 				await _dbContext.SaveChangesAsync();
 				return exercise;
 			}
@@ -62,17 +63,17 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				var resultItem = await GetById(exercise.Id);
+				var resultItem = await _dbContext.Exercises.FirstAsync(x => x.Id == exercise.Id);
 				if(resultItem != null)
 				{
-					_dbContext.Set<Exercise>().Entry(resultItem).CurrentValues.SetValues(exercise);
+					_dbContext.Entry(resultItem).CurrentValues.SetValues(exercise);
 					await _dbContext.SaveChangesAsync();
 					return exercise;
 				}
 
 				return null;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				throw;
 			}
@@ -85,7 +86,7 @@ namespace ApiFichaAcademia.Repository
 				var resultItem = await GetById(id);
 				if(resultItem != null)
 				{
-					_dbContext.Set<Exercise>().Remove(resultItem);
+					_dbContext.Exercises.Remove(resultItem);
 					await _dbContext.SaveChangesAsync();
 					return resultItem;
 				}

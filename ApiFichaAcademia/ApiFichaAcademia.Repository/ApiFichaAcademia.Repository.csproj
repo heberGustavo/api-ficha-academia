@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiFichaAcademia.Migration\ApiFichaAcademia.Migration.csproj" />
     <ProjectReference Include="..\ApiFichaAcademia.Models\ApiFichaAcademia.Models.csproj" />
   </ItemGroup>
 

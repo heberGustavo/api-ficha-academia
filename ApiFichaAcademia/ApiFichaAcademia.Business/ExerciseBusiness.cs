@@ -86,7 +86,7 @@ namespace ApiFichaAcademia.Business
 				if (resultItem != null)
 				{
 					var entity = _mapper.Map<Exercise>(exercise);
-					result.Data = _mapper.Map<ExerciseDTO>(_exerciseRepository.Update(entity));
+					result.Data = _mapper.Map<ExerciseDTO>(await _exerciseRepository.Update(entity));
 					result = ValidateHelperResult.ValidateResultItem(result);
 				}
 				else

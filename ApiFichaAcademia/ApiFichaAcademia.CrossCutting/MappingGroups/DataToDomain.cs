@@ -13,6 +13,7 @@ namespace ApiFichaAcademia.CrossCutting.MappingGroups
             CreateMap<Objective, ObjectiveDTO>();
             CreateMap<Exercise, ExerciseDTO>();
             CreateMap<LevelExercise, LevelExerciseDTO>();
+            CreateMap<Card, CardDTO>();
         }
     }
 }

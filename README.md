@@ -8,7 +8,7 @@ Routines:
 
 3- Objective Person - ok
 
-4- Exercises 
+4- Exercises - ok
 
 5- Card (information about Person and exercises) 
 

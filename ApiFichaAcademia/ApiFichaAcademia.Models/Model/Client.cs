@@ -21,6 +21,6 @@ namespace ApiFichaAcademia.Models.Model
         [Required, Range(1, 7)]
         public int WeeklyFrequency { get; set; }
 
-        //person has a Objective, Teacher and Card
+        public virtual ICollection<Card> Cards { get; set; }
     }
 }

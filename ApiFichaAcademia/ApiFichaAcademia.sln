@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Common", "5-Common", "{7A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Common", "ApiFichaAcademia.Common\ApiFichaAcademia.Common.csproj", "{189E4515-A369-4B22-AF3B-4E1F1C565B2A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6-Migration", "6-Migration", "{93A0AC11-81D2-4CD3-9F34-9CD4C32B5799}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6-Migrations", "6-Migrations", "{93A0AC11-81D2-4CD3-9F34-9CD4C32B5799}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Migration", "ApiFichaAcademia.Migration\ApiFichaAcademia.Migration.csproj", "{97B09B16-D827-4EE8-BF60-D110F8D510E5}"
 EndProject
@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Repository
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.CrossCutting", "ApiFichaAcademia.CrossCutting\ApiFichaAcademia.CrossCutting.csproj", "{312DA7D2-86BF-45E4-A0B7-791B6BE0447C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiFichaAcademia.Business", "ApiFichaAcademia.Business\ApiFichaAcademia.Business.csproj", "{702B04B7-F9EF-4060-B60C-349B0E6774C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFichaAcademia.Business", "ApiFichaAcademia.Business\ApiFichaAcademia.Business.csproj", "{702B04B7-F9EF-4060-B60C-349B0E6774C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿using ApiFichaAcademia.Models.Model;
+﻿using ApiFichaAcademia.Migrations.Configurations;
+using ApiFichaAcademia.Models.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiFichaAcademia.Migrations.Context
@@ -12,5 +13,14 @@ namespace ApiFichaAcademia.Migrations.Context
         public DbSet<Objective> Objectives { get; set; }
         public DbSet<LevelExercise> LevelExercise { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-    }
+        public DbSet<Card> Cards { get; set; }
+        public DbSet<CardExercise> CardExercises { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.ApplyConfiguration(new CardExerciseConfiguration());
+		}
+	}
 }

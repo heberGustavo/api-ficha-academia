@@ -17,5 +17,7 @@ namespace ApiFichaAcademia.Models.Model
 
         [ForeignKey("IdLevel")]
         public virtual LevelExercise LevelExercise { get; set; }
+
+        public virtual ICollection<CardExercise> CardExercises { get; set; }
     }
 }

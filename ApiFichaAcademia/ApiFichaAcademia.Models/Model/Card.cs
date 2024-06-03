@@ -9,7 +9,6 @@ namespace ApiFichaAcademia.Models.Model
         [Key]
         public int Id { get; set; }
         public int IdClient { get; set; }
-        public int IdExercise { get; set; }
 
         [Required]
         public DateTime DateStart { get; set; }
@@ -20,8 +19,7 @@ namespace ApiFichaAcademia.Models.Model
         [ForeignKey("IdClient")]
         public virtual Client Client { get; set; }
 
-        [ForeignKey("IdExercise")]
-        public virtual ICollection<Exercise> Exercises { get; set; }
+        public virtual ICollection<CardExercise> CardExercises { get; set; }
         
     }
 }

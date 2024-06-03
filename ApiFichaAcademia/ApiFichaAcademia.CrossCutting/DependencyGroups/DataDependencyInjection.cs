@@ -12,6 +12,7 @@ namespace ApiFichaAcademia.CrossCutting.DependencyGroups
 			serviceCollection.AddScoped<IClientRepository, ClientRepository>();
 			serviceCollection.AddScoped<IObjectiveRepository, ObjectiveRepository>();
 			serviceCollection.AddScoped<IExerciseRepository, ExerciseRepository>();
+			serviceCollection.AddScoped<ICardRepository, CardRepository>();
 		}
 	}
 }

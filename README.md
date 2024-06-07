@@ -10,6 +10,6 @@ Routines:
 
 4- Exercises - ok
 
-5- Card (information about Person and exercises) 
+5- Card (information about Person and exercises) - ok
 
 6- Admin 

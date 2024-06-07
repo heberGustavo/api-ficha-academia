@@ -17,6 +17,7 @@ namespace ApiFichaAcademia.CrossCutting.DependencyGroups
 			serviceCollection.AddScoped<IClientBusiness, ClientBusiness>();
 			serviceCollection.AddScoped<IObjectiveBusiness, ObjectiveBusiness>();
 			serviceCollection.AddScoped<IExerciseBusiness, ExerciseBusiness>();
+			serviceCollection.AddScoped<ICardBusiness, CardBusiness>();
 		}
 	}
 }

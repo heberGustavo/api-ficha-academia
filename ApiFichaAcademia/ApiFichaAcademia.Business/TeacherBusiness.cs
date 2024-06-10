@@ -1,4 +1,5 @@
 ﻿using ApiFichaAcademia.Business.Contract;
+using ApiFichaAcademia.Common.Helpers;
 using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Common.Utils.ResultInfo;
 using ApiFichaAcademia.Models.DTO;
@@ -42,11 +43,10 @@ namespace ApiFichaAcademia.Business
 		{
 			var result = new ResultInfoItem<TeacherDTO>();
 
-			if (id <= 0) return result;
-
 			try
 			{
 				result.Data = _mapper.Map<TeacherDTO>(await _teacherRepository.GetById(id));
+				result = ValidateHelperResult.ValidateResultItem(result);
 			}
 			catch (Exception ex)
 			{
@@ -84,8 +84,9 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				var selectItem = GetById(model.Id).Result.Data;
-				if (selectItem == null) return result;
+				var resultItem = await GetById(model.Id);
+				resultItem = ValidateHelperResult.ValidateResultItem(resultItem);
+				if (!resultItem.Status || resultItem.Data == null) return resultItem;
 
 				var modelEntity = _mapper.Map<Teacher>(model);
 				result.Data = _mapper.Map<TeacherDTO>(await _teacherRepository.Update(modelEntity));
@@ -104,11 +105,12 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				var selectItem = GetById(id).Result.Data;
-				if (selectItem == null) return result;
+				var resultItem = await GetById(id);
+				resultItem = ValidateHelperResult.ValidateResultItem(resultItem);
+				if (!resultItem.Status || resultItem.Data == null) return resultItem;
 
-				_mapper.Map<TeacherDTO>(await _teacherRepository.Delete(id));
-				result.Message = $"Teacher {selectItem.Name} was deleted!";
+				result.Data = _mapper.Map<TeacherDTO>(await _teacherRepository.Delete(id));
+				result.Message = $"Teacher {resultItem.Data.Name} was deleted!";
 			}
 			catch (Exception ex)
 			{

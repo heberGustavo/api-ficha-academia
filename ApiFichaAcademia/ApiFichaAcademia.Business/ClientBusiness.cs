@@ -47,7 +47,7 @@ namespace ApiFichaAcademia.Business
 			{
 				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.GetById(id));
 				result = ValidateHelperResult.ValidateResultItem(result);
-				if (!result.Status) return result;
+				if (!result.Status || result.Data == null) return result;
 			}
 			catch (Exception ex)
 			{
@@ -86,7 +86,7 @@ namespace ApiFichaAcademia.Business
 			{
 				var resultItem = await GetById(model.Id);
 				resultItem = ValidateHelperResult.ValidateResultItem(resultItem);
-				if (!resultItem.Status) return resultItem;
+				if (!resultItem.Status || resultItem.Data == null) return resultItem;
 
 				var entity = _mapper.Map<Client>(model);
 				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.Update(entity));
@@ -107,9 +107,7 @@ namespace ApiFichaAcademia.Business
 			try
 			{
 				var resultItem = await GetById(id);
-				if (!resultItem.Status)
-					return resultItem;
-				else if(resultItem.Data == null)
+				if (!resultItem.Status || resultItem.Data == null)
 					return resultItem;
 
 				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.Delete(id));

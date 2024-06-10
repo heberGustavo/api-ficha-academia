@@ -19,14 +19,18 @@ namespace ApiFichaAcademia.Controllers
 
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(ResultInfoList<List<ClientDTO>>))]
+		[ProducesResponseType(400)]
 		public async Task<ActionResult> GetAll()
 		{
 			var result = await _clientBusiness.GetAll();
+			if (!result.Status) return BadRequest(result);
+
 			return Ok(result);
 		}
 
 		[HttpGet("{id}")]
 		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ClientDTO>))]
+		[ProducesResponseType(400)]
 		[ProducesResponseType(404)]
 		public async Task<ActionResult> GetById(int id)
 		{
@@ -66,10 +70,12 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ClientDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Delete(int id)
 		{
 			var result = await _clientBusiness.Delete(id);
-			
 			if(!result.Status) 
 				return BadRequest(result);
 			else if(result.Data == null) 

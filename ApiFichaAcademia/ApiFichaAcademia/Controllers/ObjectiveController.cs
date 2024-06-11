@@ -1,7 +1,6 @@
 ﻿using ApiFichaAcademia.Business.Contract;
 using ApiFichaAcademia.Common.Utils;
 using ApiFichaAcademia.Models.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiFichaAcademia.Controllers
@@ -70,6 +69,7 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ObjectiveDTO>))]
 		[ProducesResponseType(400)]
 		[ProducesResponseType(404)]
 		public async Task<ActionResult> Delete(int id)

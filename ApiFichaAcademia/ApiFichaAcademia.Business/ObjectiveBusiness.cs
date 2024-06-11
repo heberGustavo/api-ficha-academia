@@ -49,8 +49,6 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				if (id <= 0) return result;
-
 				result.Data = _mapper.Map<ObjectiveDTO>(await _objectiveRepository.GetById(id));
 				result = ValidateHelperResult.ValidateResultItem(result);
 			}
@@ -74,7 +72,6 @@ namespace ApiFichaAcademia.Business
 			{
 				var entity = _mapper.Map<Objective>(model);
 				result.Data = _mapper.Map<ObjectiveDTO>(await _objectiveRepository.Create(entity));
-				
 				result = ValidateHelperResult.ValidateResultItem(result);
 			}
 			catch (Exception ex)

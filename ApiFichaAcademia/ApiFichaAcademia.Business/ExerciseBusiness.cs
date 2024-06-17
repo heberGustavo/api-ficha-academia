@@ -27,7 +27,8 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data = _mapper.Map<List<ExerciseDTO>>(await _exerciseRepository.GetAll());
+				result.Data = await _exerciseRepository.GetAll();
+				result.QuantData = result.Data.Count;
 			}
 			catch (Exception ex)
 			{
@@ -43,7 +44,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data = _mapper.Map<ExerciseDTO>(await _exerciseRepository.GetById(id));
+				result.Data = await _exerciseRepository.GetById(id);
 				result = ValidateHelperResult.ValidateResultItem(result);
 			}
 			catch (Exception ex)
@@ -65,7 +66,11 @@ namespace ApiFichaAcademia.Business
 			try
 			{
 				var entity = _mapper.Map<Exercise>(exercise);
-				result.Data = _mapper.Map<ExerciseDTO>(await _exerciseRepository.Create(entity));
+
+				var resultCreate = _mapper.Map<ExerciseDTO>(await _exerciseRepository.Create(entity));
+				if(resultCreate != null)
+					result.Data = await _exerciseRepository.GetById(resultCreate.Id);
+				
 				result = ValidateHelperResult.ValidateResultItem(result);
 			}
 			catch (Exception ex)
@@ -86,7 +91,11 @@ namespace ApiFichaAcademia.Business
 				if (resultItem != null)
 				{
 					var entity = _mapper.Map<Exercise>(exercise);
-					result.Data = _mapper.Map<ExerciseDTO>(await _exerciseRepository.Update(entity));
+					
+					var resultUpdate = _mapper.Map<ExerciseDTO>(await _exerciseRepository.Update(entity));
+					if (resultUpdate != null)
+						result.Data = await _exerciseRepository.GetById(exercise.Id);
+
 					result = ValidateHelperResult.ValidateResultItem(result);
 				}
 				else
@@ -109,8 +118,15 @@ namespace ApiFichaAcademia.Business
 				var resultItem = await _exerciseRepository.GetById(id);
 				if (resultItem != null)
 				{
-					result.Data = _mapper.Map<ExerciseDTO>(await _exerciseRepository.Delete(id));
-					result = ValidateHelperResult.ValidateResultItem(result);
+					var resultDelete = await _exerciseRepository.Delete(id);
+					if (resultDelete <= 0)
+					{
+						result.Status = false;
+						result = ValidateHelperResult.ValidateResultItem(result);
+						return result;
+					}
+
+					result.Data = resultItem;
 				}
 				else
 					result = ValidateHelperResult.ValidateResultItem(result);

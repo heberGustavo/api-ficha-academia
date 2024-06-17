@@ -30,6 +30,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ExerciseDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _exerciseBusiness.GetById(id);
@@ -42,6 +45,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ExerciseDTO>))]
+		[ProducesResponseType(400)]
 		public async Task<ActionResult> Create([FromBody] ExerciseDTO model)
 		{
 			var result = await _exerciseBusiness.Create(model);
@@ -51,6 +56,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPut]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ExerciseDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Update([FromBody] ExerciseDTO model)
 		{
 			var result = await _exerciseBusiness.Update(model);
@@ -63,6 +71,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<ExerciseDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Delete(int id)
 		{
 			var result = await _exerciseBusiness.Delete(id);

@@ -1,4 +1,5 @@
 ﻿using ApiFichaAcademia.Migrations.Context;
+using ApiFichaAcademia.Models.DTO;
 using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,21 @@ namespace ApiFichaAcademia.Repository
 
 		#region READ
 
-		public async Task<List<Exercise>> GetAll()
+		public async Task<List<ExerciseDTO>> GetAll()
 		{
 			try
 			{
-				return await _dbContext.Exercises.ToListAsync();
+				var query = from exercise in _dbContext.Exercises
+							join levelExercise in _dbContext.LevelExercise on exercise.IdLevel equals levelExercise.Id
+							select new ExerciseDTO
+							{
+								Id = exercise.Id,
+								IdLevel = exercise.IdLevel,
+								Name = exercise.Name,
+								NameLevel = levelExercise.Name
+							};
+
+				return await query.ToListAsync();
 			}
 			catch (Exception)
 			{
@@ -29,11 +40,22 @@ namespace ApiFichaAcademia.Repository
 			}
 		}
 
-		public async Task<Exercise> GetById(int id)
+		public async Task<ExerciseDTO> GetById(int id)
 		{
 			try
 			{
-				return await _dbContext.Exercises.FirstOrDefaultAsync(x => x.Id == id);
+				var query = from exercise in _dbContext.Exercises
+							join levelExercise in _dbContext.LevelExercise on exercise.IdLevel equals levelExercise.Id
+							where exercise.Id == id
+							select new ExerciseDTO
+							{
+								Id = exercise.Id,
+								Name = exercise.Name,
+								IdLevel = exercise.IdLevel,
+								NameLevel = levelExercise.Name
+							};
+
+				return await query.FirstOrDefaultAsync();
 			}
 			catch (Exception)
 			{
@@ -79,19 +101,18 @@ namespace ApiFichaAcademia.Repository
 			}
 		}
 
-		public async Task<Exercise> Delete(int id)
+		public async Task<int> Delete(int id)
 		{
 			try
 			{
-				var resultItem = await GetById(id);
+				var resultItem = await _dbContext.Exercises.FirstOrDefaultAsync(x => x.Id == id);
 				if(resultItem != null)
 				{
 					_dbContext.Exercises.Remove(resultItem);
-					await _dbContext.SaveChangesAsync();
-					return resultItem;
+					return await _dbContext.SaveChangesAsync();
 				}
 
-				return null;
+				return 0;
 			}
 			catch (Exception)
 			{

@@ -11,5 +11,7 @@ namespace ApiFichaAcademia.Models.DTO
 
 		[Required, Range(1, 3)]
 		public int IdLevel { get; set; }
+
+		public string NameLevel { get; set; } = string.Empty;
 	}
 }

@@ -6,7 +6,6 @@ This is a Web API project using .NET 8 and Entity Framework Core 8, where the ob
 ### Endpoints:
 ![screenshot-localhost_5086-2024 06 17-08_59_05](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/5514ce54-36ec-482e-919e-89b2aa9f855a)
 
-
 ### Connection String
 You must access the file which is located at: 1-API -> appsettings.json -> CONNECTION_STRINGS
 
@@ -24,5 +23,8 @@ Example after created
 
 ![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/5e87f284-0fdd-495d-b538-6765a09db8b2)
 
+### Structure
+
+![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/64805b5b-f73d-4eee-b50d-69a32d550960)
 
 I hope everything goes perfectly, if there are any questions or errors, please contact me via Linkedin (link in Bio).

@@ -30,6 +30,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<CardDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> GetById(int id)
 		{
 			var result = await _cardBusiness.GetById(id);
@@ -42,6 +45,8 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<CardDTO>))]
+		[ProducesResponseType(400)]
 		public async Task<ActionResult> Create([FromBody] CardDTO model)
 		{
 			var result = await _cardBusiness.Create(model);
@@ -51,6 +56,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpPut]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<CardDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Update([FromBody] CardDTO model)
 		{
 			var result = await _cardBusiness.Update(model);
@@ -63,6 +71,9 @@ namespace ApiFichaAcademia.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[ProducesResponseType(200, Type = typeof(ResultInfoItem<CardDTO>))]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(404)]
 		public async Task<ActionResult> Delete(int id)
 		{
 			var result = await _cardBusiness.Delete(id);

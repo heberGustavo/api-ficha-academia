@@ -1,4 +1,5 @@
 ﻿using ApiFichaAcademia.Migrations.Context;
+using ApiFichaAcademia.Models.DTO;
 using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +21,22 @@ namespace ApiFichaAcademia.Repository
 
 		#region READ
 
-		public async Task<List<Card>> GetAll()
+		public async Task<List<CardDTO>> GetAll()
 		{
 			try
 			{
-				return await _context.Cards.ToListAsync();
+				var result = from card in _context.Cards
+							 select new CardDTO
+							 {
+								 Id = card.Id,
+								 DateStart = card.DateStart,
+								 DateEnd = card.DateEnd,
+								 IdClient = card.IdClient,
+								 IdObjective = card.IdObjective,
+								 IdTeacher = card.IdTeacher
+							 };
+
+				return await result.ToListAsync();
 			}
 			catch (Exception)
 			{
@@ -32,11 +44,23 @@ namespace ApiFichaAcademia.Repository
 			}
 		}
 
-		public async Task<Card> GetById(int id)
+		public async Task<CardDTO> GetById(int id)
 		{
 			try
 			{
-				return await _context.Cards.FirstOrDefaultAsync(x => x.Id == id);
+				var query = from card in _context.Cards
+							where card.Id == id
+							select new CardDTO
+							{
+								Id = card.Id,
+								DateStart = card.DateStart,
+								DateEnd = card.DateEnd,
+								IdClient = card.IdClient,
+								IdObjective = card.IdObjective,
+								IdTeacher = card.IdTeacher,
+							};
+
+				return await query.FirstOrDefaultAsync();
 			}
 			catch (Exception)
 			{

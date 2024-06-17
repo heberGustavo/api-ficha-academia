@@ -1,11 +1,12 @@
-﻿using ApiFichaAcademia.Models.Model;
+﻿using ApiFichaAcademia.Models.DTO;
+using ApiFichaAcademia.Models.Model;
 
 namespace ApiFichaAcademia.Repository.Contract
 {
 	public interface ICardRepository
 	{
-		Task<List<Card>> GetAll();
-		Task<Card> GetById(int id);
+		Task<List<CardDTO>> GetAll();
+		Task<CardDTO> GetById(int id);
 
 		Task<Card> Create(Card card);
 		Task<Card> Update(Card card);

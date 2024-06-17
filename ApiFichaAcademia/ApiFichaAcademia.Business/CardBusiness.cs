@@ -35,7 +35,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data =  _mapper.Map<List<CardDTO>>(await _cardRepository.GetAll());
+				result.Data = await _cardRepository.GetAll();
 				result.QuantData = result.Data.Count;
 			}
 			catch (Exception ex)
@@ -52,7 +52,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data = _mapper.Map<CardDTO>(await _cardRepository.GetById(id));
+				result.Data = await _cardRepository.GetById(id);
 				result = ValidateHelperResult.ValidateResultItem(result);
 				if (!result.Status) return result;
 			}
@@ -96,7 +96,7 @@ namespace ApiFichaAcademia.Business
 			{
 				var resultItem = await GetById(model.Id);
 				resultItem = ValidateHelperResult.ValidateResultItem(resultItem);
-				if (!resultItem.Status) return resultItem;
+				if (!resultItem.Status || resultItem.Data == null) return resultItem;
 
 				result = await VerifyExistingData(model);
 				if (!result.Status) return result;

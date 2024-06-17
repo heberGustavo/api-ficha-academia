@@ -28,7 +28,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data =  _mapper.Map<List<ClientDTO>>(await _clientRepository.GetAll());
+				result.Data = await _clientRepository.GetAll();
 				result.QuantData = result.Data.Count;
 			}
 			catch (Exception ex)
@@ -45,7 +45,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data = _mapper.Map<ClientDTO>(await _clientRepository.GetById(id));
+				result.Data = await _clientRepository.GetById(id);
 				result = ValidateHelperResult.ValidateResultItem(result);
 				if (!result.Status || result.Data == null) return result;
 			}

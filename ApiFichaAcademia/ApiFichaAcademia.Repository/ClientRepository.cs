@@ -1,4 +1,6 @@
-﻿using ApiFichaAcademia.Models.Model;
+﻿using ApiFichaAcademia.Migrations.Context;
+using ApiFichaAcademia.Models.DTO;
+using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,20 +8,30 @@ namespace ApiFichaAcademia.Repository
 {
 	public class ClientRepository : IClientRepository
 	{
-		private readonly DbContext _dbContext;
+		private readonly FichaAcademiaContext _dbContext;
 
-		public ClientRepository(DbContext dbContext)
+		public ClientRepository(FichaAcademiaContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
 
 		#region READ
 
-		public async Task<List<Client>> GetAll()
+		public async Task<List<ClientDTO>> GetAll()
 		{
 			try
 			{
-				return await _dbContext.Set<Client>().ToListAsync();
+				var query = from client in _dbContext.Clients
+							select new ClientDTO
+							{
+								Id = client.Id,
+								Name = client.Name,
+								Age = client.Age,
+								WeeklyFrequency = client.WeeklyFrequency,
+								Weight = client.Weight,
+							};
+
+				return await query.ToListAsync();
 			}
 			catch (Exception)
 			{
@@ -27,11 +39,22 @@ namespace ApiFichaAcademia.Repository
 			}
 		}
 
-		public Task<Client> GetById(int id)
+		public Task<ClientDTO> GetById(int id)
 		{
 			try
 			{
-				return _dbContext.Set<Client>().FirstOrDefaultAsync(x => x.Id == id);
+				var query = from client in _dbContext.Clients
+							where client.Id == id
+							select new ClientDTO
+							{
+								Id = client.Id,
+								Name = client.Name,
+								Age = client.Age,
+								WeeklyFrequency = client.WeeklyFrequency,
+								Weight = client.Weight,
+							};
+
+				return query.FirstOrDefaultAsync();
 			}
 			catch (Exception)
 			{
@@ -47,7 +70,7 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				await _dbContext.Set<Client>().AddAsync(client);
+				await _dbContext.Clients.AddAsync(client);
 				await _dbContext.SaveChangesAsync();
 				return client;
 			}
@@ -61,10 +84,10 @@ namespace ApiFichaAcademia.Repository
 		{
 			try
 			{
-				var resultItem = await GetById(client.Id);
+				var resultItem = await _dbContext.Clients.FirstOrDefaultAsync(x => x.Id == client.Id);
 				if(resultItem != null)
 				{
-					_dbContext.Set<Client>().Entry(resultItem).CurrentValues.SetValues(client);
+					_dbContext.Clients.Entry(resultItem).CurrentValues.SetValues(client);
 					await _dbContext.SaveChangesAsync();
 					return client;
 				}
@@ -79,10 +102,10 @@ namespace ApiFichaAcademia.Repository
 
 		public async Task<Client> Delete(int id)
 		{
-			var resultItem = await GetById(id);
+			var resultItem = await _dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
 			if(resultItem != null )
 			{
-				_dbContext.Set<Client>().Remove(resultItem);
+				_dbContext.Clients.Remove(resultItem);
 				await _dbContext.SaveChangesAsync();
 				return resultItem;
 			}

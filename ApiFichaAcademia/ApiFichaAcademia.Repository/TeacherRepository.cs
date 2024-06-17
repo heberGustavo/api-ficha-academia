@@ -1,4 +1,6 @@
-﻿using ApiFichaAcademia.Models.Model;
+﻿using ApiFichaAcademia.Migrations.Context;
+using ApiFichaAcademia.Models.DTO;
+using ApiFichaAcademia.Models.Model;
 using ApiFichaAcademia.Repository.Contract;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,20 +8,28 @@ namespace ApiFichaAcademia.Repository
 {
 	public class TeacherRepository : ITeacherRepository
     {
-        private readonly DbContext _dbContext;
+        private readonly FichaAcademiaContext _dbContext;
 
-		public TeacherRepository(DbContext dbContext)
+		public TeacherRepository(FichaAcademiaContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
 
 		#region READ
 
-		public async Task<List<Teacher>> GetAll()
+		public async Task<List<TeacherDTO>> GetAll()
         {
             try
             {
-                return await _dbContext.Set<Teacher>().ToListAsync();
+                var query = from teacher in _dbContext.Teachers
+                            select new TeacherDTO
+                            {
+                                Id = teacher.Id,
+                                Name = teacher.Name,
+                                Period = teacher.Period,
+                                Phone = teacher.Phone,
+                            };
+                return await query.ToListAsync();
 			}
             catch (Exception ex)
             {
@@ -27,7 +37,26 @@ namespace ApiFichaAcademia.Repository
             }
         }
 
-        public async Task<Teacher> GetById(int id) => await _dbContext.Set<Teacher>().FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<TeacherDTO> GetById(int id)
+        {
+            try
+            {
+                var query = from teacher in _dbContext.Teachers
+                            where teacher.Id == id
+							select new TeacherDTO
+							{
+								Id = teacher.Id,
+								Name = teacher.Name,
+								Period = teacher.Period,
+								Phone = teacher.Phone,
+							};
+                return await query.FirstOrDefaultAsync();
+			}
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 
@@ -35,44 +64,56 @@ namespace ApiFichaAcademia.Repository
 
         public async Task<Teacher> Create(Teacher teacher)
         {
-            await _dbContext.Set<Teacher>().AddAsync(teacher);
-            await _dbContext.SaveChangesAsync();
-
-            return teacher;
+            try
+            {
+                await _dbContext.Teachers.AddAsync(teacher);
+                await _dbContext.SaveChangesAsync();
+                return teacher;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<Teacher> Update(Teacher teacher)
         {
-            var result = await GetById(teacher.Id);
-            if (result != null)
+            try
             {
-                try
-                {
-                    _dbContext.Set<Teacher>().Entry(result).CurrentValues.SetValues(teacher);
-                    await _dbContext.SaveChangesAsync();
-                    return teacher;
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-            }
-            else 
-                return null;
+                var result = await _dbContext.Teachers.FirstOrDefaultAsync(x => x.Id == teacher.Id);
+				if (result != null)
+				{
+					_dbContext.Teachers.Entry(result).CurrentValues.SetValues(teacher);
+					await _dbContext.SaveChangesAsync();
+					return teacher;
+				}
 
+                return null;
+			}
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<Teacher> Delete(int id)
         {
-            var result = await GetById(id);
-            if (result != null)
+            try
             {
-                _dbContext.Set<Teacher>().Remove(result);
-				await _dbContext.SaveChangesAsync();
-                return result;
+                var result = await _dbContext.Teachers.FirstOrDefaultAsync(x => x.Id == id);
+				if (result != null)
+				{
+					_dbContext.Set<Teacher>().Remove(result);
+					await _dbContext.SaveChangesAsync();
+					return result;
+				}
+
+				return null;
+			}
+            catch (Exception)
+            {
+                throw;
             }
-            else
-                return null;
         }
 
         #endregion

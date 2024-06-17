@@ -32,7 +32,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data = _mapper.Map<List<ObjectiveDTO>>(await _objectiveRepository.GetAll());
+				result.Data = await _objectiveRepository.GetAll();
 				result.QuantData = result.Data.Count;
 			}
 			catch (Exception ex)
@@ -49,7 +49,7 @@ namespace ApiFichaAcademia.Business
 
 			try
 			{
-				result.Data = _mapper.Map<ObjectiveDTO>(await _objectiveRepository.GetById(id));
+				result.Data = await _objectiveRepository.GetById(id);
 				result = ValidateHelperResult.ValidateResultItem(result);
 			}
 			catch (Exception ex)

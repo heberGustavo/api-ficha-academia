@@ -1,30 +1,103 @@
-# API - Ficha Academia
+<h1 align="center">
+   API .NET 8 - Ficha Academia
+</h1>
 
-### About the project:
-This is a Web API project using .NET 8 and Entity Framework Core 8, where the objective is for the user to manage gym.
+</br>
+  
+<p align="center">
+  <a href="#white_check_mark-Features">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#globe_with_meridians-Technologies-and-Concepts-Implemented">Technology</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+   <a href="#gear-Architecture">Architecture</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+   <a href="#gear-Architecture">Endpoints</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#wrench-How-to-use">How to use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-Licence">Licence</a>
+</p>
 
-### Endpoints:
+
+## :white_check_mark: Features
+
+* WebAPI was built with .NET 8
+* CRUD using ORM Entity Framework Core
+* AutoMapper
+
+## :globe_with_meridians: Technologies and Concepts Implemented
+
+This project was developed using:
+
+- .NET 8
+- Entity Framework Core 8.0.4
+- AutoMapper 12.0.0
+- Swagger 6.4.0
+
+Concepts/Techniques used in:
+- Data Transfer Object [DTO]
+- Repository Pattern
+- Dependency Injection
+
+## :gear: Architecture
+
+```🌐
+src
+├── 📂 1- API
+|   ├── 📂 Controllers
+├── 📂 2- Business
+|   ├── 📂 Contract
+├── 📂 3- Models
+|   ├── 📂 DTO
+|   ├── 📂 Model
+├── 📂 4- Repository
+|   ├── 📂 Contract
+├── 📂 5- Commom
+|   ├── 📂 Commom
+|       ├── 📂 Helper
+|       ├── 📂 Utils
+|   ├── 📂 CrossCutting
+|       ├── 📂 DependencyGroups
+|       ├── 📂 MappingGroups
+├── 📂 5- Migrations
+|   ├── 📂 Configurations
+|   ├── 📂 Context
+|   ├── 📂 Migrations
+
+```
+
+## :round_pushpin: Endpoints
 ![screenshot-localhost_5086-2024 06 17-08_59_05](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/5514ce54-36ec-482e-919e-89b2aa9f855a)
 
-### Connection String
-You must access the file which is located at: 1-API -> appsettings.json -> CONNECTION_STRINGS
 
-![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/6d27a9fd-3092-4c6b-bf83-4252776194d6)
+## :wrench: How to use
 
-To create database, you need to access
+Clone that application using [Git](https://git-scm.com) and follow the next steps:
 
-![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/cfec03be-4869-4bfd-926c-e262f05e1e70)
+```bash
+# 1. Clone this repository
+$ git clone https://github.com/heberGustavo/api-ficha-academia.git
 
-and to run the command: update-database
+# 2. Open the project in Visual Studio
 
-![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/6c7c5ffa-4c92-47ab-81f6-38c9ba440a87)
+# 3. Execute the build
 
-Example after created
+# 4. Change the Connection String. To modify follow this path:
+  4.1 - API > ApiFichaAcademia > appsettings.json
+  4.2 - Modify the value to "FichaAcademiaConnection"
 
-![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/5e87f284-0fdd-495d-b538-6765a09db8b2)
+# 5. Execute Migration
+  5.1 - Open the "Package Manager Console"
+  5.2 - Select the project "Migration" in "Default project"
+  5.3 - Execute this commands: Update-Database
 
-### Structure
+# 6. Run the application
 
-![image](https://github.com/heberGustavo/api-ficha-academia/assets/44476616/64805b5b-f73d-4eee-b50d-69a32d550960)
+```
 
 I hope everything goes perfectly, if there are any questions or errors, please contact me via Linkedin (link in Bio).
+
+## :memo: Licence 
+This project is under the MIT license. See the [LICENSE] for more information.
+
+
+## Autor
+
+| [<img src="https://avatars.githubusercontent.com/u/44476616?v=4" style="max-width: 100%;width: 90px;"><br><sub>Heber Gustavo</sub>](https://github.com/heberGustavo) |
+| :---: |
+|[Linkedin](https://www.linkedin.com/in/heber-gustavo/)|

@@ -90,8 +90,6 @@ $ git clone https://github.com/heberGustavo/api-ficha-academia.git
 
 ```
 
-I hope everything goes perfectly, if there are any questions or errors, please contact me via Linkedin (link in Bio).
-
 ## :memo: Licence 
 This project is under the MIT license. See the [LICENSE] for more information.
 
